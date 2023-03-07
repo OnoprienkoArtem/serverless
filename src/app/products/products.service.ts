@@ -49,8 +49,7 @@ export class ProductsService extends ApiService {
         );
     }
 
-    const url = this.getUrl("bff", `product/${id}`);
-    console.log(url);
+    const url = this.getUrl("bff", `products/${id}`);
     return this.http.get<Product>(url).pipe(
       tap(product => {
         console.log(product);
