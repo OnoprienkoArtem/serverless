@@ -54,6 +54,10 @@ export class ProductItemComponent implements OnInit {
     this.cartService.removeItem(this.id);
   }
 
+  getProductInfo() {
+    console.log(this.product);
+  }
+
   /** Move focus to a corresponding control when controls switch */
   private updateFocusIfNeeded() {
     let prev: number;
