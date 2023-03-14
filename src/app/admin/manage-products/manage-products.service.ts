@@ -20,14 +20,12 @@ export class ManageProductsService extends ApiService {
     console.log('uploadProductsCSV file', file);
 
     return this.getPreSignedUrl(file.name).pipe(
-      switchMap((url) => {
-          return this.http.put(url, file, {
+      switchMap((url) => this.http.put(url, file, {
             headers: {
               // eslint-disable-next-line @typescript-eslint/naming-convention
               "Content-Type": "text/csv"
             }
-          });
-        }
+          })
       )
     );
   }
