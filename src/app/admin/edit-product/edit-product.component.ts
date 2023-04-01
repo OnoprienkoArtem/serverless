@@ -77,6 +77,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe((product) => {
+        console.log('product', product);
         if (product) {
           this.form.patchValue(product);
           this.productId = product.id;
