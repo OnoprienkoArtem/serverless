@@ -1,11 +1,12 @@
 import { Injectable, Injector } from "@angular/core";
-import { EMPTY, Observable } from "rxjs";
+import { EMPTY, Observable, of } from "rxjs";
 import { ApiService } from "../../core/api.service";
-import { switchMap, tap } from "rxjs/operators";
+import { catchError, switchMap, tap } from "rxjs/operators";
+import { NotificationService } from "../../core/notification.service";
 
 @Injectable()
 export class ManageProductsService extends ApiService {
-  constructor(injector: Injector) {
+  constructor(injector: Injector, private readonly notificationService: NotificationService) {
     super(injector);
   }
 
@@ -23,10 +24,20 @@ export class ManageProductsService extends ApiService {
       switchMap((url) => this.http.put(url, file, {
             headers: {
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              "Content-Type": "text/csv"
+              "Content-Type": "text/csv",
             }
           })
-      )
+      ),
+      catchError(error => {
+        const {message} = error;
+
+        console.log(error);
+        this.notificationService.showError(
+          `${message} `,
+          0
+        );
+        return of(false);
+      })
     );
   }
 

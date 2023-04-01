@@ -32,7 +32,8 @@
             "style": "camelCase"
           }
         ],
-        "rxjs/no-subject-value": [0]
+        "rxjs/no-subject-value": [0],
+        "rxjs/no-implicit-any-catch": [0]
       }
     },
     {
